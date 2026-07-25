@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Hydrocheck</string>
+    <string name="title_activity_main">Hydrocheck</string>
+    <string name="package_name">com.hydrocheck.Hydrocheck</string>
+    <string name="custom_url_scheme">com.hydrocheck.Hydrocheck</string>
+</resources>

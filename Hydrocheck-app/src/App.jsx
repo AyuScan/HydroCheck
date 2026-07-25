@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { BleClient } from "@capacitor-community/bluetooth-le";
 
 const SERVICE_UUID = "0000181a-0000-1000-8000-00805f9b34fb";
 const CHARACTERISTIC_UUID = "00002a6e-0000-1000-8000-00805f9b34fb";
@@ -124,7 +125,7 @@ export default function App() {
 	const [bpmHistory, setBpmHistory] = useState([]);
 	const [logs, setLogs] = useState([]);
 
-	const deviceRef = useRef(null);
+	const deviceIdRef = useRef(null);
 
 	const addLog = (msg) => {
 		const time = new Date().toLocaleTimeString();
@@ -134,19 +135,24 @@ export default function App() {
 	};
 
 	useEffect(() => {
-		if (!navigator.bluetooth) {
-			setBluetoothSupported(false);
-			setStatusText("Web Bluetooth not supported in this browser");
-			addLog(
-				"This browser doesn't support Web Bluetooth. Use Chrome or Edge on desktop/Android.",
-			);
-		}
+		const initBle = async () => {
+			try {
+				await BleClient.initialize();
+				setBluetoothSupported(true);
+				addLog("Bluetooth LE initialized successfully.");
+			} catch (e) {
+				console.error("BLE init failed", e);
+				setBluetoothSupported(false);
+				setStatusText("Bluetooth LE not available");
+				addLog("Bluetooth LE initialization failed. Platform may not support Bluetooth.");
+			}
+		};
+		initBle();
 	}, []);
 
-	const handleNotification = (event) => {
-		const value = event.target.value;
+	const handleNotificationValue = (value) => {
 		const decoder = new TextDecoder("utf-8");
-		const text = decoder.decode(value);
+		const text = decoder.decode(value.buffer);
 		try {
 			const data = JSON.parse(text);
 
@@ -184,38 +190,30 @@ export default function App() {
 		setSkin(null);
 		setStrain(null);
 		setGsr(null);
+		deviceIdRef.current = null;
 	};
 
 	const connect = async () => {
 		console.log("Connect function called");
-		console.log("navigator.bluetooth availability:", !!navigator.bluetooth);
 		setErrorTip(null);
 		try {
 			addLog("Requesting device...");
-			if (!navigator.bluetooth) {
-				throw new Error(
-					"navigator.bluetooth is undefined. Make sure you are using HTTPS or localhost in Chrome/Edge.",
-				);
-			}
-			const device = await navigator.bluetooth.requestDevice({
-				filters: [{ name: "Hydrocheck" }],
-				optionalServices: [SERVICE_UUID],
+			const device = await BleClient.requestDevice({
+				services: [SERVICE_UUID],
+				name: "Hydrocheck",
 			});
 
-			deviceRef.current = device;
-			addLog(`Found ${device.name}, connecting...`);
+			deviceIdRef.current = device.deviceId;
+			addLog(`Found ${device.name || "Hydrocheck"}, connecting...`);
 
-			device.addEventListener("gattserverdisconnected", handleDisconnection);
+			await BleClient.connect(device.deviceId, handleDisconnection);
+			addLog("GATT server connected successfully.");
 
-			const server = await device.gatt.connect();
-			const service = await server.getPrimaryService(SERVICE_UUID);
-			const characteristic =
-				await service.getCharacteristic(CHARACTERISTIC_UUID);
-
-			await characteristic.startNotifications();
-			characteristic.addEventListener(
-				"characteristicvaluechanged",
-				handleNotification,
+			await BleClient.startNotifications(
+				device.deviceId,
+				SERVICE_UUID,
+				CHARACTERISTIC_UUID,
+				handleNotificationValue
 			);
 
 			setIsConnected(true);
@@ -223,16 +221,16 @@ export default function App() {
 			addLog("Subscribed to live notifications.");
 		} catch (err) {
 			console.error(err);
-			addLog(`Connection failed: ${err.message}`);
+			addLog(`Connection failed: ${err.message || err}`);
 			setIsConnected(false);
 			setStatusText("Not connected");
 
 			if (
-				err.message.includes("permission") ||
+				err.message?.includes("permission") ||
 				err.name === "SecurityError"
 			) {
 				setErrorTip(
-					"Bluetooth permission is blocked. Please click the settings icon in your browser URL bar and allow 'Bluetooth'.",
+					"Bluetooth permission is blocked. Please ensure Bluetooth permissions are granted to the application.",
 				);
 			}
 		}
