@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #111216;
+  --panel: #1b1c21;
+  --text: #ffffff;
+  --text-dim: #7d7e84;
+  --cool: #3ecf8e;
+  --warn: #ffb703;
+  --hot: #ff4d4d;
+  --ok: #3ecf8e;
+  --pill-bg: #272830;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
