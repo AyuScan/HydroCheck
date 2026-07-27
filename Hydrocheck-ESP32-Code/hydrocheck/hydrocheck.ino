@@ -204,7 +204,13 @@ void setup() {
   );
   pCharacteristic->addDescriptor(new BLE2902());
   pService->start();
-  pServer->getAdvertising()->start();
+
+  BLEAdvertising *pAdvertising = pServer->getAdvertising();
+  pAdvertising->addServiceUUID(SERVICE_UUID);
+  pAdvertising->setScanResponse(true);
+  pAdvertising->setMinPreferred(0x06);  // helps some phones/browsers detect it faster
+  pAdvertising->setMinPreferred(0x12);
+  pAdvertising->start();
   Serial.println("BLE advertising started");
 
   delay(1500); // let the splash screen show briefly before calibration starts
@@ -517,8 +523,8 @@ void sampleAndProcess() {
     ibiIndex = 0; // force HRV to also require a fresh full buffer of real beats
   }
 
-  Serial.print("Raw IR: ");
-  Serial.println(lastIR);   // >50000 = good contact, <5000 = no/poor contact
+  // Serial.print("Raw IR: ");
+  // Serial.println(lastIR);   // >50000 = good contact, <5000 = no/poor contact
   float hrv = (ibiIndex >= 8) ? computeIBIStdDev() : 0;
 
   // ---- Risk scoring ----

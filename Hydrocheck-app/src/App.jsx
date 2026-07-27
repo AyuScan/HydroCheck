@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BleClient } from "@capacitor-community/bluetooth-le";
 
-const SERVICE_UUID = "0000181a-0000-1000-8000-00805f9b34fb";
-const CHARACTERISTIC_UUID = "00002a6e-0000-1000-8000-00805f9b34fb";
+const SERVICE_UUID = "0000181A-0000-1000-8000-00805F9B34FB";
+const CHARACTERISTIC_UUID = "00002A6E-0000-1000-8000-00805F9B34FB";
 const RING_CIRCUMFERENCE = 2 * Math.PI * 50;
 
 function BpmChart({ bpmHistory }) {
@@ -144,7 +144,9 @@ export default function App() {
 				console.error("BLE init failed", e);
 				setBluetoothSupported(false);
 				setStatusText("Bluetooth LE not available");
-				addLog("Bluetooth LE initialization failed. Platform may not support Bluetooth.");
+				addLog(
+					"Bluetooth LE initialization failed. Platform may not support Bluetooth.",
+				);
 			}
 		};
 		initBle();
@@ -213,7 +215,7 @@ export default function App() {
 				device.deviceId,
 				SERVICE_UUID,
 				CHARACTERISTIC_UUID,
-				handleNotificationValue
+				handleNotificationValue,
 			);
 
 			setIsConnected(true);
