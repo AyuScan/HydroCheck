@@ -35,6 +35,14 @@ print("Loading dataset...")
 
 df = pd.read_csv(DATASET)
 
+# RENAME THE LABELS COLUMN IF IT HAS A TRAILING COMMA ARTIFACT (e.g. Unnamed: 9)
+if LABEL not in df.columns:
+    unnamed_cols = [c for c in df.columns if "Unnamed" in c]
+    if unnamed_cols:
+        df = df.rename(columns={unnamed_cols[0]: LABEL})
+    else:
+        df = df.rename(columns={df.columns[-1]: LABEL})
+
 print(df.head())
 
 # REMOVE UNUSED COLUMNS
