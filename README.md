@@ -4,7 +4,7 @@ Hydrocheck is an end-to-end wearable solution designed for real-time dehydration
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```mermaid
 graph TD
@@ -33,7 +33,7 @@ graph TD
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 *   [AI-Model](file:///d:/Hydrocheck/AI-Model): Machine learning models, feature extraction pipelines, data preprocess tools, and training scripts.
 *   [Hydrocheck-ESP32-Code](file:///d:/Hydrocheck/Hydrocheck-ESP32-Code): C++ firmware project containing raw reading loops, BLE GATT configuration, calibration, and native neural network execution.
@@ -42,7 +42,7 @@ graph TD
 
 ---
 
-## 🧠 1. AI & Machine Learning Pipeline (`AI-Model`)
+## 1. AI & Machine Learning Pipeline (`AI-Model`)
 
 The machine learning pipeline processes time-series data using sliding windows to extract high-dimensional statistics before feeding it to a classification network.
 
@@ -65,7 +65,7 @@ The machine learning pipeline processes time-series data using sliding windows t
 
 ---
 
-## ⚡ 2. Firmware & Edge Inference (`Hydrocheck-ESP32-Code`)
+## 2. Firmware & Edge Inference (`Hydrocheck-ESP32-Code`)
 
 The device runs on an ESP32 micro-controller and handles reading acquisition, calibration, filtering, and local neural network computation.
 
@@ -91,7 +91,7 @@ A responsive single-page web app built on React and Vite, compiled into an APK w
 
 ---
 
-## 🚀 Setup & Installation
+## Setup & Installation
 
 ### AI Model Pipeline
 ```bash
