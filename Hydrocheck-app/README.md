@@ -4,7 +4,7 @@ This directory contains the Capacitor-based React mobile application for the Hyd
 
 ---
 
-## 🛠️ Tech Stack & Features
+## Tech Stack & Features
 
 *   **Frontend Core:** React with [Vite](https://vite.dev/) for quick development hot module reloading.
 *   **Mobile Framework:** [Capacitor](https://capacitorjs.com/) to build cross-platform mobile packages (Android/iOS) using web assets.
@@ -14,7 +14,7 @@ This directory contains the Capacitor-based React mobile application for the Hyd
 
 ---
 
-## 📁 File Structure
+## File Structure
 
 *   [App.jsx](file:///d:/Hydrocheck/Hydrocheck-app/src/App.jsx): Main application controller containing Bluetooth state handlers, telemetry parser, logs visualizer, and application layout.
 *   [App.css](file:///d:/Hydrocheck/Hydrocheck-app/src/App.css): Dark theme layout stylesheet containing glassmorphic styling, progress rings, and animations.
@@ -24,7 +24,7 @@ This directory contains the Capacitor-based React mobile application for the Hyd
 
 ---
 
-## 🚀 Setup & Execution
+## Setup & Execution
 
 ### 1. Prerequisites
 Ensure you have [Node.js](https://nodejs.org/) and Android Studio (with Android SDK) installed.
