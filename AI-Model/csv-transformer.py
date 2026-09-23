@@ -19,6 +19,16 @@ with open(input_filename, "r") as infile:
         full_row = {"Timestamp (s)": timestamp}
         full_row.update(row_dict)
 
+        # Derive Label from Risk for training
+        risk_val = float(row_dict.get("Risk", 0))
+        if risk_val > 60:
+            label = "High risk"
+        elif risk_val > 30:
+            label = "Moderate risk"
+        else:
+            label = "Low risk"
+        full_row["Label"] = label
+
         parsed_rows.append(full_row)
 
         # Increment timestamp by 6 seconds for the next line

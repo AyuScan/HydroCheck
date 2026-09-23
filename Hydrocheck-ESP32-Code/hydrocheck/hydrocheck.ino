@@ -209,7 +209,7 @@ void setup() {
   pAdvertising->addServiceUUID(SERVICE_UUID);
   pAdvertising->setScanResponse(true);
   pAdvertising->setMinPreferred(0x06);  // helps some phones/browsers detect it faster
-  pAdvertising->setMinPreferred(0x12);
+  pAdvertising->setMaxPreferred(0x12);
   pAdvertising->start();
   Serial.println("BLE advertising started");
 

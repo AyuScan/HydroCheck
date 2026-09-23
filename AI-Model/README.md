@@ -4,7 +4,7 @@ This directory contains the code to convert raw time-series data, extract high-d
 
 ---
 
-## 📊 Pipeline Pipeline Flow
+## 📊 Pipeline Flow
 
 ```
 [Raw logs: datas.txt] 
@@ -29,11 +29,11 @@ This directory contains the code to convert raw time-series data, extract high-d
 
 ## 📁 File Structure
 
-*   [csv-transformer.py](file:///d:/Hydrocheck/AI-Model/csv-transformer.py): Transforms space-separated telemetry values to standard CSV columns.
-*   [preprocessing.py](file:///d:/Hydrocheck/AI-Model/preprocessing.py): Normalizes the dataset using `StandardScaler` and constructs 10-sample sliding windows (representing 60s windows).
-*   [dsdt_features.py](file:///d:/Hydrocheck/AI-Model/dsdt_features.py): Computes 34 statistical time-domain and correlation features per window.
-*   [train_model.py](file:///d:/Hydrocheck/AI-Model/train_model.py): Defines the neural network topology, fits validation arrays, outputs learning curve figures, and exports `best_model.keras`.
-*   [convert_tflite.py](file:///d:/Hydrocheck/AI-Model/convert_tflite.py): Converts Keras models to float32 and INT8 quantized TFLite representations.
+*   [csv-transformer.py](./csv-transformer.py): Transforms space-separated telemetry values to standard CSV columns.
+*   [preprocessing.py](./preprocessing.py): Normalizes the dataset using `StandardScaler` and constructs 10-sample sliding windows (representing 60s windows).
+*   [dsdt_features.py](./dsdt_features.py): Computes 34 statistical time-domain and correlation features per window.
+*   [train_model.py](./train_model.py): Defines the neural network topology, fits validation arrays, outputs learning curve figures, and exports `best_model.keras`.
+*   [convert_tflite.py](./convert_tflite.py): Converts Keras models to float32 and INT8 quantized TFLite representations.
 
 ---
 

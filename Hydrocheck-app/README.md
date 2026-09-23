@@ -16,11 +16,11 @@ This directory contains the Capacitor-based React mobile application for the Hyd
 
 ## File Structure
 
-*   [App.jsx](file:///d:/Hydrocheck/Hydrocheck-app/src/App.jsx): Main application controller containing Bluetooth state handlers, telemetry parser, logs visualizer, and application layout.
-*   [App.css](file:///d:/Hydrocheck/Hydrocheck-app/src/App.css): Dark theme layout stylesheet containing glassmorphic styling, progress rings, and animations.
-*   [main.jsx](file:///d:/Hydrocheck/Hydrocheck-app/src/main.jsx): React entry point.
-*   [capacitor.config.ts](file:///d:/Hydrocheck/Hydrocheck-app/capacitor.config.ts): Configuration file defining App ID, app name, and web assets directory.
-*   [android/](file:///d:/Hydrocheck/Hydrocheck-app/android): Generated native Android Studio project.
+*   [App.jsx](./src/App.jsx): Main application controller containing Bluetooth state handlers, telemetry parser, logs visualizer, and application layout.
+*   [App.css](./src/App.css): Dark theme layout stylesheet containing glassmorphic styling, progress rings, and animations.
+*   [main.jsx](./src/main.jsx): React entry point.
+*   [capacitor.config.ts](./capacitor.config.ts): Configuration file defining App ID, app name, and web assets directory.
+*   [android/](./android): Generated native Android Studio project.
 
 ---
 
@@ -51,4 +51,4 @@ npx cap sync android
 # Open in Android Studio to run on an emulator or physical device
 npx cap open android
 ```
-The compiled Android binary is located at the root of the project as [Hydrocheck.apk](file:///d:/Hydrocheck/Hydrocheck.apk).
+The compiled Android binary is located at the root of the project as [Hydrocheck.apk](../Hydrocheck.apk).

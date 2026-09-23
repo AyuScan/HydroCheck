@@ -74,14 +74,18 @@ namespace DehydrationML {
 
     float getSlope(const float* x, int n) {
         // Linear regression slope for indices 0..N-1
-        // N = 10 -> sum(i) = 45, sum(i^2) = 285, Denom = N*sum(i^2) - sum(i)^2 = 825
+        float sumI = 0, sumI2 = 0;
         float sumX = 0;
         float sumIX = 0;
         for (int i = 0; i < n; i++) {
+            sumI += i;
+            sumI2 += i * i;
             sumX += x[i];
             sumIX += i * x[i];
         }
-        return (10.0f * sumIX - 45.0f * sumX) / 825.0f;
+        float denom = (float)n * sumI2 - sumI * sumI;
+        if (denom < 1e-6f) return 0.0f;
+        return ((float)n * sumIX - sumI * sumX) / denom;
     }
 
     float getTrapezoid(const float* x, int n) {

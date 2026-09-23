@@ -2,6 +2,12 @@
 
 Hydrocheck is an end-to-end wearable solution designed for real-time dehydration and heat stress monitoring. It integrates multiple biological sensors, runs on-device TinyML machine learning, and streams live telemetry to a companion mobile application over Bluetooth Low Energy (BLE).
 
+<p align="center">
+  <img src="assets/prototype.png" alt="Hydrocheck Wearable Prototype" width="380" />
+  <br>
+  <sub><b>Hydrocheck Hardware Wearable Prototype (ESP32, OLED Display & Biosensors)</b></sub>
+</p>
+
 ---
 
 ## System Architecture
@@ -35,10 +41,10 @@ graph TD
 
 ## Project Structure
 
-*   [AI-Model](file:///d:/Hydrocheck/AI-Model): Machine learning models, feature extraction pipelines, data preprocess tools, and training scripts.
-*   [Hydrocheck-ESP32-Code](file:///d:/Hydrocheck/Hydrocheck-ESP32-Code): C++ firmware project containing raw reading loops, BLE GATT configuration, calibration, and native neural network execution.
-*   [Hydrocheck-app](file:///d:/Hydrocheck/Hydrocheck-app): React Vite Capacitor app source code to monitor sensor states, plot graphs, and view system logs.
-*   [Hydrocheck.apk](file:///d:/Hydrocheck/Hydrocheck.apk): Built binary ready for installation on Android devices.
+*   [AI-Model](./AI-Model): Machine learning models, feature extraction pipelines, data preprocess tools, and training scripts.
+*   [Hydrocheck-ESP32-Code](./Hydrocheck-ESP32-Code): C++ firmware project containing raw reading loops, BLE GATT configuration, calibration, and native neural network execution.
+*   [Hydrocheck-app](./Hydrocheck-app): React Vite Capacitor app source code to monitor sensor states, plot graphs, and view system logs.
+*   [Hydrocheck.apk](./Hydrocheck.apk): Built binary ready for installation on Android devices.
 
 ---
 
@@ -96,7 +102,8 @@ A responsive single-page web app built on React and Vite, compiled into an APK w
 ### AI Model Pipeline
 ```bash
 cd AI-Model
-pip install -r requirements.txt
+pip install numpy scipy pandas scikit-learn tensorflow matplotlib joblib
+python csv-transformer.py
 python preprocessing.py
 python dsdt_features.py
 python train_model.py

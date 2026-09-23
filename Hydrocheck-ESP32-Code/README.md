@@ -20,7 +20,7 @@ This directory contains the C++/Arduino firmware for the Hydrocheck wearable dev
 
 ## 🧠 On-Device TinyML Inference
 
-The firmware does not require heavy runtime libraries for inference. It executes a native C++ feedforward forward pass located in [ml_inference.cpp](file:///d:/Hydrocheck/Hydrocheck-ESP32-Code/hydrocheck/ml_inference.cpp).
+The firmware does not require heavy runtime libraries for inference. It executes a native C++ feedforward forward pass located in [ml_inference.cpp](./hydrocheck/ml_inference.cpp).
 
 1.  **Normalization:** Scale raw signals using precomputed `StandardScaler` factors.
 2.  **Rolling Buffer:** Keeps track of the last 10 samples (representing a 60-second window).
@@ -31,10 +31,10 @@ The firmware does not require heavy runtime libraries for inference. It executes
 
 ## 📁 File Structure
 
-*   [hydrocheck_ml.ino](file:///d:/Hydrocheck/Hydrocheck-ESP32-Code/hydrocheck/hydrocheck_ml.ino): Core Arduino script with setup, sensor reading loops, Kalman filter, automated calibration, and BLE server.
-*   [ml_inference.cpp](file:///d:/Hydrocheck/Hydrocheck-ESP32-Code/hydrocheck/ml_inference.cpp) & [ml_inference.h](file:///d:/Hydrocheck/Hydrocheck-ESP32-Code/hydrocheck/ml_inference.h): Zero-dependency native implementation of the neural network classifier.
-*   [model_parameters.h](file:///d:/Hydrocheck/Hydrocheck-ESP32-Code/hydrocheck/model_parameters.h): Exported weights and bias matrices from the Keras model.
-*   [dehydration_model.h](file:///d:/Hydrocheck/Hydrocheck-ESP32-Code/hydrocheck/dehydration_model.h): Alternative embedded model array.
+*   [hydrocheck_ml.ino](./hydrocheck/hydrocheck_ml.ino): Core Arduino script with setup, sensor reading loops, Kalman filter, automated calibration, and BLE server.
+*   [ml_inference.cpp](./hydrocheck/ml_inference.cpp) & [ml_inference.h](./hydrocheck/ml_inference.h): Zero-dependency native implementation of the neural network classifier.
+*   [model_parameters.h](./hydrocheck/model_parameters.h): Exported weights and bias matrices from the Keras model.
+*   [dehydration_model.h](./hydrocheck/dehydration_model.h): Alternative embedded model array.
 
 ---
 
